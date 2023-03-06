@@ -1,3 +1,3 @@
-# Bark-Client-Browser
+# Bark-Client-Authentication-Node 
 
-Browser Client for Bark
+Node Client for Bark Authentication Module
