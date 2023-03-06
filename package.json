@@ -13,7 +13,8 @@
   },
   "homepage": "https://github.com/BarkSH/Bark-Client-Authentication-Node#readme",
   "peerDependencies": {
-    "@barksh/authentication-types": "*"
+    "@barksh/authentication-types": "*",
+    "@barksh/token-node": "*"
   },
   "dependencies": {
     "@sudoo/magic": "^1.9.0",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "@barksh/authentication-types": "^1.0.0",
+    "@barksh/token-node": "^1.0.0",
     "@sudoo/triforce": "^3.10.1"
   },
   "nyc": {
