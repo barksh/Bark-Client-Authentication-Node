@@ -41,7 +41,8 @@ export const requestBarkRefreshV1 = async (
         },
     );
 
-    const token: BarkAuthenticationToken = BarkAuthenticationToken.fromTokenOrThrow(refreshResponse.token);
+    const token: BarkAuthenticationToken =
+        BarkAuthenticationToken.fromTokenOrThrow(refreshResponse.token);
 
     return {
         authenticationToken: token,

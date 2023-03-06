@@ -42,7 +42,7 @@ export const requestBarkInquiryV1 = async (
         throw panic.code(ERROR_CODE.DNS_LOOKUP_FAILED_1, target);
     }
 
-    const realizeResponse = await postInquiryV1Proxy(
+    const inquiryResponse = await postInquiryV1Proxy(
         targetHost,
         {
             domain: config.domain,
@@ -51,8 +51,8 @@ export const requestBarkInquiryV1 = async (
     );
 
     return {
-        exposureKey: realizeResponse.exposureKey,
-        hiddenKey: realizeResponse.hiddenKey,
-        redirectUrl: `${targetUIHost}?key=${realizeResponse.exposureKey}`,
+        exposureKey: inquiryResponse.exposureKey,
+        hiddenKey: inquiryResponse.hiddenKey,
+        redirectUrl: `${targetUIHost}?key=${inquiryResponse.exposureKey}`,
     };
 };
