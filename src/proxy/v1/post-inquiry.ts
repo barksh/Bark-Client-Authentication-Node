@@ -6,6 +6,7 @@
 
 import { buildUrlForPostInquiryV1, PostInquiryV1ProxyRequest, PostInquiryV1ProxyResponse } from "@barksh/authentication-types";
 import { HTTP_RESPONSE_CODE } from "@sudoo/magic";
+import Axios from "axios";
 import { ERROR_CODE } from "../../error/code";
 import { panic } from "../../error/panic";
 
@@ -16,13 +17,15 @@ export const postInquiryV1Proxy = async (
 
     const path: string = buildUrlForPostInquiryV1(authenticationHost);
 
-    const response: Response = await fetch(path, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
+    const response: Response = await Axios.post(
+        path,
+        config,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+            },
         },
-        body: JSON.stringify(config),
-    });
+    );
 
     if (response.status !== HTTP_RESPONSE_CODE.OK) {
         throw panic.code(

@@ -5,8 +5,10 @@
  */
 
 import { BarkRefreshToken } from "@barksh/token-node";
+import { ERROR_CODE } from "../../error/code";
+import { panic } from "../../error/panic";
+import { dnsLookupAuthModuleCName, DNS_CNAME_RECORD_NOT_FOUND_SYMBOL } from "../../network/dns/cname";
 import { postRedeemV1Proxy } from "../../proxy/v1/post-redeem";
-import { fixTargetAuthenticationModuleHost } from "../../util/fix-host";
 
 export type RequestBarkRedeemV1Config = {
 
@@ -26,7 +28,11 @@ export const requestBarkRedeemV1 = async (
     config: RequestBarkRedeemV1Config,
 ): Promise<RequestBarkRedeemV1Response> => {
 
-    const targetHost: string = await fixTargetAuthenticationModuleHost(target, config.overrideTargetHost);
+    const targetHost: string | typeof DNS_CNAME_RECORD_NOT_FOUND_SYMBOL = await dnsLookupAuthModuleCName(target, config.overrideTargetHost);
+
+    if (targetHost === DNS_CNAME_RECORD_NOT_FOUND_SYMBOL) {
+        throw panic.code(ERROR_CODE.DNS_LOOKUP_FAILED_1, target);
+    }
 
     const redeemResponse = await postRedeemV1Proxy(
         targetHost,

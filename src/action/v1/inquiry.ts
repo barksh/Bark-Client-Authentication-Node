@@ -5,8 +5,10 @@
  */
 
 import { InquiryAction } from "@barksh/authentication-types";
+import { ERROR_CODE } from "../../error/code";
+import { panic } from "../../error/panic";
+import { dnsLookupAuthModuleCName, dnsLookupAuthUICName, DNS_CNAME_RECORD_NOT_FOUND_SYMBOL } from "../../network/dns/cname";
 import { postInquiryV1Proxy } from "../../proxy/v1/post-inquiry";
-import { fixTargetAuthenticationModuleHost, fixTargetAuthenticationUIHost } from "../../util/fix-host";
 
 export type RequestBarkInquiryV1Config = {
 
@@ -29,8 +31,16 @@ export const requestBarkInquiryV1 = async (
     config: RequestBarkInquiryV1Config,
 ): Promise<RequestBarkInquiryV1Response> => {
 
-    const targetHost: string = await fixTargetAuthenticationModuleHost(target, config.overrideTargetHost);
-    const targetUIHost: string = await fixTargetAuthenticationUIHost(target, config.overrideTargetUIHost);
+    const targetHost: string | typeof DNS_CNAME_RECORD_NOT_FOUND_SYMBOL = await dnsLookupAuthModuleCName(target, config.overrideTargetHost);
+    const targetUIHost: string | typeof DNS_CNAME_RECORD_NOT_FOUND_SYMBOL = await dnsLookupAuthUICName(target, config.overrideTargetUIHost);
+
+    if (targetHost === DNS_CNAME_RECORD_NOT_FOUND_SYMBOL) {
+        throw panic.code(ERROR_CODE.DNS_LOOKUP_FAILED_1, target);
+    }
+
+    if (targetUIHost === DNS_CNAME_RECORD_NOT_FOUND_SYMBOL) {
+        throw panic.code(ERROR_CODE.DNS_LOOKUP_FAILED_1, target);
+    }
 
     const realizeResponse = await postInquiryV1Proxy(
         targetHost,
