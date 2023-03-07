@@ -31,8 +31,10 @@ export const requestBarkInquiryV1 = async (
     config: RequestBarkInquiryV1Config,
 ): Promise<RequestBarkInquiryV1Response> => {
 
-    const targetHost: string | typeof DNS_CNAME_RECORD_NOT_FOUND_SYMBOL = await dnsLookupAuthModuleCName(target, config.overrideTargetHost);
-    const targetUIHost: string | typeof DNS_CNAME_RECORD_NOT_FOUND_SYMBOL = await dnsLookupAuthUICName(target, config.overrideTargetUIHost);
+    const targetHost: string | typeof DNS_CNAME_RECORD_NOT_FOUND_SYMBOL =
+        await dnsLookupAuthModuleCName(target, config.overrideTargetHost);
+    const targetUIHost: string | typeof DNS_CNAME_RECORD_NOT_FOUND_SYMBOL =
+        await dnsLookupAuthUICName(target, config.overrideTargetUIHost);
 
     if (targetHost === DNS_CNAME_RECORD_NOT_FOUND_SYMBOL) {
         throw panic.code(ERROR_CODE.DNS_LOOKUP_FAILED_1, target);

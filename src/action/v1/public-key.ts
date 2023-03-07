@@ -27,7 +27,8 @@ export const requestBarkPublicKeyV1 = async (
     config: RequestBarkPublicKeyV1Config,
 ): Promise<RequestBarkPublicKeyV1Response> => {
 
-    const targetHost: string | typeof DNS_CNAME_RECORD_NOT_FOUND_SYMBOL = await dnsLookupAuthModuleCName(targetDomain, config.overrideTargetHost);
+    const targetHost: string | typeof DNS_CNAME_RECORD_NOT_FOUND_SYMBOL =
+        await dnsLookupAuthModuleCName(targetDomain, config.overrideTargetHost);
 
     if (targetHost === DNS_CNAME_RECORD_NOT_FOUND_SYMBOL) {
         throw panic.code(ERROR_CODE.DNS_LOOKUP_FAILED_1, targetDomain);

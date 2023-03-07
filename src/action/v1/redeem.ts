@@ -28,7 +28,8 @@ export const requestBarkRedeemV1 = async (
     config: RequestBarkRedeemV1Config,
 ): Promise<RequestBarkRedeemV1Response> => {
 
-    const targetHost: string | typeof DNS_CNAME_RECORD_NOT_FOUND_SYMBOL = await dnsLookupAuthModuleCName(target, config.overrideTargetHost);
+    const targetHost: string | typeof DNS_CNAME_RECORD_NOT_FOUND_SYMBOL =
+        await dnsLookupAuthModuleCName(target, config.overrideTargetHost);
 
     if (targetHost === DNS_CNAME_RECORD_NOT_FOUND_SYMBOL) {
         throw panic.code(ERROR_CODE.DNS_LOOKUP_FAILED_1, target);
