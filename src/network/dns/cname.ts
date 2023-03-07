@@ -19,9 +19,16 @@ export const dnsLookupAuthModuleCName = async (domain: string, override?: string
         return override;
     }
 
-    return await dnsLookupCName(
-        `${AUTHENTICATION_MODULE_PREFIX}.${domain}`,
-    );
+    const cnameResult: string | typeof DNS_CNAME_RECORD_NOT_FOUND_SYMBOL =
+        await dnsLookupCName(
+            `${AUTHENTICATION_MODULE_PREFIX}.${domain}`,
+        );
+
+    if (cnameResult === DNS_CNAME_RECORD_NOT_FOUND_SYMBOL) {
+        return DNS_CNAME_RECORD_NOT_FOUND_SYMBOL;
+    }
+
+    return `https://${cnameResult}`;
 };
 
 export const dnsLookupAuthUICName = async (domain: string, override?: string): Promise<string | typeof DNS_CNAME_RECORD_NOT_FOUND_SYMBOL> => {
@@ -30,9 +37,16 @@ export const dnsLookupAuthUICName = async (domain: string, override?: string): P
         return override;
     }
 
-    return await dnsLookupCName(
-        `${AUTHENTICATION_UI_PREFIX}.${domain}`,
-    );
+    const cnameResult: string | typeof DNS_CNAME_RECORD_NOT_FOUND_SYMBOL =
+        await dnsLookupCName(
+            `${AUTHENTICATION_UI_PREFIX}.${domain}`,
+        );
+
+    if (cnameResult === DNS_CNAME_RECORD_NOT_FOUND_SYMBOL) {
+        return DNS_CNAME_RECORD_NOT_FOUND_SYMBOL;
+    }
+
+    return `https://${cnameResult}`;
 };
 
 export const dnsLookupCName = (domain: string): Promise<string | typeof DNS_CNAME_RECORD_NOT_FOUND_SYMBOL> => {
