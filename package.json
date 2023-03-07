@@ -1,6 +1,6 @@
 {
   "name": "@barksh/client-authentication-node",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Node Client for Bark Authentication Module",
   "repository": {
     "type": "git",
