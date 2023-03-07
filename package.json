@@ -1,6 +1,6 @@
 {
   "name": "@barksh/client-authentication-node",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Node Client for Bark Authentication Module",
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@barksh/authentication-types": "^1.0.0",
-    "@barksh/token-node": "^1.0.0",
+    "@barksh/token-node": "^1.2.0",
     "@sudoo/triforce": "^3.10.1"
   },
   "nyc": {
