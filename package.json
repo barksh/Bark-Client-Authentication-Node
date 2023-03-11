@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@barksh/authentication-types": "^1.0.0",
-    "@barksh/token-node": "^1.2.0",
+    "@barksh/token-node": "^1.3.0",
     "@sudoo/triforce": "^3.10.1"
   },
   "nyc": {
