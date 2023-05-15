@@ -19,7 +19,7 @@
   "dependencies": {
     "@sudoo/magic": "^1.9.0",
     "axios": "^1.4.0",
-    "connor": "^2.8.0"
+    "connor": "^2.9.0"
   },
   "devDependencies": {
     "@barksh/authentication-types": "^1.0.0",
