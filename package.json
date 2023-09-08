@@ -18,11 +18,11 @@
   },
   "dependencies": {
     "@sudoo/magic": "^1.9.0",
-    "axios": "^1.4.0",
+    "axios": "^1.5.0",
     "connor": "^2.9.0"
   },
   "devDependencies": {
-    "@barksh/authentication-types": "^1.0.0",
+    "@barksh/authentication-types": "^1.1.0",
     "@barksh/token-node": "^1.5.0",
     "@sudoo/triforce": "^3.11.0"
   },
